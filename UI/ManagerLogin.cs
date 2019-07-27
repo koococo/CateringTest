@@ -34,6 +34,7 @@ namespace UI
                 DialogResult res=  MessageBox.Show("登录成功！","提示",MessageBoxButtons.OK);
                 if (res==DialogResult.OK) {
                     FormMain main = new FormMain();
+                    main.Tag = mi.MType;
                     main.Show();
                  
                     this.Visible = false;

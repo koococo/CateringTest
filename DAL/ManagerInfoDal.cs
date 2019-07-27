@@ -14,14 +14,15 @@ namespace DAL
     {
         public List<ManagerInfo> GetList(ManagerInfo mi)
         {
-            SQLiteParameter[] sp = new SQLiteParameter[2];
+            List<SQLiteParameter> listP = new List<SQLiteParameter>();
+ 
             string sql = "SELECT *FROM managerinfo";
             if (mi!=null) {
-                sql += " WHERE mname = @mname AND mpwd=@mpwd";  
-                sp[0] = new SQLiteParameter("@mname",mi.MName);
-                sp[1] = new SQLiteParameter("@mpwd", mi.MPwd);
+                sql += " WHERE mname = @mname AND mpwd=@mpwd";
+                listP.Add(new SQLiteParameter("@mname",mi.MName));
+                listP.Add(new SQLiteParameter("@mpwd", mi.MPwd));
             }
-            DataTable table = SqliteHelper.GetList(sql,sp);
+            DataTable table = SqliteHelper.GetList(sql, listP.ToArray());
             //构造集合对象
             List<ManagerInfo> list = new List<ManagerInfo>();
             foreach (DataRow item in table.Rows)

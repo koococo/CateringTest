@@ -21,5 +21,19 @@ namespace UI
         {
             Application.Exit();
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            //if (this.Tag.ToString()=="1") {
+
+
+            //    managerMenu.Visible = false;
+            //        }
+        }
+
+        private void quitMenu_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
