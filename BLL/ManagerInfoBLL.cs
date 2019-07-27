@@ -13,7 +13,7 @@ namespace BLL
         ManagerInfoDal Managerinfodal = new ManagerInfoDal();
         public List<ManagerInfo> GetList() {
 
-          return  Managerinfodal.GetList();
+          return  Managerinfodal.GetList(null);
 
         }
         public bool Add(ManagerInfo InsertData) {
@@ -29,7 +29,18 @@ namespace BLL
         public bool Modifier(ManagerInfo mi) {
             return Managerinfodal.UpData(mi) > 0;
         }
+        public bool Login(ManagerInfo mi)
+        {
+            var list  = Managerinfodal.GetList( mi);
+            if (list.Count>0) {
 
+                return true;
+            }else
+            {
+                return false;
+            }
+            
+        }
 
     }
 }

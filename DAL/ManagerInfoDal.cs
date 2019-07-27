@@ -12,9 +12,16 @@ namespace DAL
 {
     public class ManagerInfoDal
     {
-        public List<ManagerInfo> GetList()
+        public List<ManagerInfo> GetList(ManagerInfo mi)
         {
-            DataTable table = SqliteHelper.GetList("SELECT *FROM managerinfo");
+            SQLiteParameter[] sp = new SQLiteParameter[2];
+            string sql = "SELECT *FROM managerinfo";
+            if (mi!=null) {
+                sql += " WHERE mname = @mname AND mpwd=@mpwd";  
+                sp[0] = new SQLiteParameter("@mname",mi.MName);
+                sp[1] = new SQLiteParameter("@mpwd", mi.MPwd);
+            }
+            DataTable table = SqliteHelper.GetList(sql,sp);
             //构造集合对象
             List<ManagerInfo> list = new List<ManagerInfo>();
             foreach (DataRow item in table.Rows)
